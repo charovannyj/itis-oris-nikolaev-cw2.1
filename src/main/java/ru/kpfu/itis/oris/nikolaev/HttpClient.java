@@ -1,4 +1,4 @@
-package com.example.demo;
+package ru.kpfu.itis.oris.nikolaev;
 
 import java.util.Map;
 

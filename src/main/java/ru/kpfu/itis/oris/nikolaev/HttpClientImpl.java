@@ -1,4 +1,4 @@
-package com.example.demo;
+package ru.kpfu.itis.oris.nikolaev;
 
 import com.google.gson.Gson;
 
@@ -16,7 +16,6 @@ import java.util.Scanner;
 public class HttpClientImpl implements HttpClient {
 
     static String getUrl = "https://jsonplaceholder.typicode.com/posts";
-    static String postUrl = "https://gorest.co.in/public/v1/users";
     static Map<String, String> user;
 
     public static void main(String[] args) {

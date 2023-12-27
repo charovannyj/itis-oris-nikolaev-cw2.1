@@ -1,4 +1,4 @@
-package com.example.demo;
+package ru.kpfu.itis.oris.nikolaev;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -35,14 +35,21 @@ public class HelloController {
     private ImageView plane;
     @FXML
     private Text status;
-
+    private HttpClientImpl httpClient = new HttpClientImpl();
 
     @FXML
     private void execute() {
         String code = textFieldForCode.getText();
         try {
-            String request = "https://airlabs.co/api/v9/flight?flight_iata=" + code + "&api_key=" + HelloApplication.api_key;
-            String answer = new HttpClientImpl().get(request, null);
+            String string1ForSb = "https://airlabs.co/api/v9/flight?flight_iata=";
+            String string2ForSb = "&api_key=";
+            StringBuilder sb = new StringBuilder();
+            sb.append(string1ForSb);
+            sb.append(code);
+            sb.append(string2ForSb);
+            sb.append(HelloApplication.api_key);
+            String request = sb.toString();
+            String answer = httpClient.get(request, null);
             JSONObject json = new JSONObject(answer);
             JSONObject response = json.getJSONObject("response");
             String start = response.getString("dep_time_utc");
@@ -61,14 +68,9 @@ public class HelloController {
             System.out.println("Текущая дата: " + date);
             System.out.println("Значение переменной start: " + start);
             System.out.println("Значение переменной end: " + end);
-            Date startDate = null;
-            Date endDate = null;
-            try {
-                startDate = dateFormat.parse(start);
-                endDate = dateFormat.parse(end);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            Date startDate = dateFormat.parse(start);
+            Date endDate = dateFormat.parse(end);
+
             long diffInMilliesStart = currentDate.getTime() - startDate.getTime();
             long diffInMinutesStart = diffInMilliesStart / (60 * 1000);
 

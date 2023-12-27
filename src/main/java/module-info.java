@@ -7,6 +7,6 @@ module com.example.demo {
 
 
 
-    opens com.example.demo to javafx.fxml;
-    exports com.example.demo;
+    opens ru.kpfu.itis.oris.nikolaev to javafx.fxml;
+    exports ru.kpfu.itis.oris.nikolaev;
 }
